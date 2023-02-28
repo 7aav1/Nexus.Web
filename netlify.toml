@@ -1,0 +1,6 @@
+[build]
+  command = "vite build"
+  publish = "build"
+
+[context.deploy-preview.environment]
+  ACCESS_TOKEN = "not so secret"
