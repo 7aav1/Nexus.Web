@@ -3,7 +3,7 @@
     import { page } from '$app/stores';
     import { supabase } from "$lib/supabase";
 
-    import ContentCard from "$lib/components/ContentCard.svelte";
+    import ContentCard from "$lib/components/Column.svelte";
 
 //  https://www.youtube.com/watch?v=DEGHlIRuIP8&t=423s
 //  https://github.com/sharu725/supabase-todo
@@ -59,29 +59,31 @@
       </form>
     </section>
 
-    <section>
-      <h3>Kõik Ülesanded</h3>
+
       {#await exercise()}
           exercises searching...
-      {:then}
-        {#each ulesanded as ulesanne}
-          <ContentCard column={ulesanne}/>
-        {/each}
+      {:catch error}
+        <section>{error}</section>
       {/await}
-    </section>
+
 
     {#each kategooriad as kategooria}
-      <section>
-        <input plaseholder="Kategooria pealkiri" value={kategooria.nimi} on:input={(e) => {category("update","nimi",e.currentTarget.value,kategooria.id)}} />
-        <button on:click={() => {category("delete",null,null,kategooria.id)}}>Delete</button>
-        <hr>
-        <div style="display: grid; grid: min-content / repeat(auto-fit,minmax(10rem,15rem)); gap: 10px;">
+      <section id={kategooria.id}>
+        <header>
+          <div style="display: flex;">
+            <aside style="margin-right:8px;padding:0 5px">{ulesanded.length}</aside>
+            <h3><input style="all:unset" plaseholder={kategooria.nimi} value={kategooria.nimi} on:input={(e) => {category("update","nimi",e.currentTarget.value,  kategooria.id)}} /></h3>
+          </div>
+          <nav><button on:click={() => {category("delete",null,null,kategooria.id)}}>Delete</button></nav>
+        </header>     
+        <div style="display: grid; grid: min-content / repeat(auto-fit,minmax(10rem,15rem)); gap: 10px;padding:10px">
           {#each ulesanded as ulesanne}
             {#if ulesanne.kategooria == kategooria.id}
-              <ContentCard table={kategooria} column={ulesanne} />
+              <ContentCard column={ulesanne} />
             {/if}
           {/each}
         </div>
+
       </section>
     {:else}
       <section>No categories found</section>
