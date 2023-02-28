@@ -1,13 +1,13 @@
 <!-- HEAD ### -->
   <svelte:head>
-    <title>{name ? name : "TITLE"}</title>
+    <title>{name}</title>
     <meta name="description" content="SOON">
   </svelte:head>
 
 
 <!-- SCRIPT ### -->
   <script lang="ts">
-    let name = import.meta.env.VITE_TITLE;
+    let name = import.meta.env.VITE_TITLE || "TITLE";
 
     import "./layout.scss";
     import { supabase } from "$lib/supabase";
@@ -39,8 +39,11 @@
 
 
     // CONSOLE
-    import { page } from '$app/stores'
+    import { page } from '$app/stores';
     let paths = $page.url.pathname;
+    if(!["localhost", "n3xu5.netlify.app"].includes($page.url.hostname)){
+      location.href="https://n3xu5.netlify.app/"
+    }
   </script>
 
 
@@ -52,7 +55,7 @@
       <span style="display: flex; gap: 10px;">
         {#each paths.split("/") as path, i}
           {#if i == 0}
-            <a href="/">TITLE</a>
+            <a href="/">{name}</a>
           {:else}
             <a href="{paths.split(path)[0]}{path}">{path}</a>
           {/if}
