@@ -40,7 +40,7 @@
 
 body {
 > div {
-  grid: "up up right" min-content "left main right" 1fr "bottom bottom right" min-content / min-content 1fr min-content;
+  grid: "left up" min-content "left main" 1fr "left bottom" min-content / min-content 1fr min-content;
   height: calc(100vh - 16px);
 } }
 
@@ -60,13 +60,14 @@ body {
 
 
 // BACKGROUND
-  header, footer {backdrop-filter: blur(3px) contrast(0.9);&:has(*){padding: 5px;}}
   body {background: #111 url(/noise.png)}
+  header,footer {background: #000;}
   main, ol {background: var(--color_02)}
   section, ul {background: var(--color_01)}
 
 
 // PADDING
+  header, aside {&:has(*){padding: 5px }}
   li {padding: 5px 10px;}
 
   section {
@@ -86,7 +87,7 @@ body {
   }
 
   section + section{
-    margin-top: 10px;}
+    margin-top: 5px;}
 
 
 // LIST & HOVER

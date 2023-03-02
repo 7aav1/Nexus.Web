@@ -17,7 +17,7 @@
 
 <section>
   <h1>About Us</h1>
-  <p>The small introduction of the server: Place where you candevelop    your social skills and find new friends or like-mindedIndividuals in   the process with whom you can have a great time.</p>
+  <p>The small introduction of the server: Place where you can develop your social skills and find new friends or like-mindedIndividuals in   the process with whom you can have a great time.</p>
 </section> <section>
 
   <h3>RULES</h3>

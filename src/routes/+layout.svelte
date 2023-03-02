@@ -13,6 +13,7 @@
     import { supabase } from "$lib/supabase";
     import { onMount } from 'svelte';
 
+    import Sidebar from "$lib/layout/sidebar.svelte";
 
     let load: boolean, user:any;
     let bottom:boolean=true, up:boolean=true, left:boolean=true, right:boolean=false;
@@ -52,6 +53,11 @@
     // CONSOLE
     import { page } from '$app/stores';
     let paths = $page.url.pathname;
+
+
+
+    // TEST 
+
   </script>
 
 
@@ -62,7 +68,6 @@
     <header on:mouseleave={leave}>
       {#if up}
         <nav style="gap: 10px;">
-          <button class="ri-menu-2-line" on:click={()=>{left = !left}} class:active={left}/>
           {#each paths.split("/") as path, i}
             {#if i == 0}
               <a href="/">{name}</a>
@@ -87,20 +92,11 @@
     {#if user}
       <aside>
         {#if left}
-          <ul>
-            <button title="Search" class="ri-search-line" />
-          </ul> <ul>
-            <button title="XML" class="ri-code-s-slash-line" on:click={() =>  {window.open('data/test.xml')}} />
-            <button title="JSON" class="ri-braces-line" on:click={() =>   {window.open('data/test.json')}} />
-          </ul>
+          <Sidebar />
         {/if}
       </aside>
     {/if}
-      <aside>
-        {#if right}
-          <p>Works</p>
-        {/if}
-      </aside>
+
     <main>
       <slot />
     </main>
@@ -115,7 +111,7 @@
     </footer>
   {/if}
 
-  <svelte:window on:keydown|preventDefault={onKeyDown} />
+  <svelte:window on:keydown={onKeyDown} />
 
 
 <!-- STYLE ### -->
@@ -127,14 +123,15 @@
     width: max-content;
     gap: 5px;
     flex-direction: column;
+
+    &:nth-of-type(1){grid-area: left;
+      &:has(*){
+        padding: 5px;
+        width: 15rem;
+        backdrop-filter: blur(3px) contrast(0.9);
+        margin-right: 8px;}
     
-    &:has(*){padding: 5px;}
-    &:nth-of-type(1){grid-area: left;background: var(--color_02);}
-    &:nth-of-type(2) {grid-area: right;
-      &:has(*){backdrop-filter: blur(3px) contrast(0.9);
-      margin-left: 8px;
-      width: 15rem;}
-    }}
+    } }
     main {
     grid-area: main;
     overflow: hidden overlay;

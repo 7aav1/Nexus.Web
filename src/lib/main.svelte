@@ -3,8 +3,8 @@
   import { page } from '$app/stores';
   import { supabase } from "$lib/supabase";
 
-  import ContentCard from "$lib/components/Column.svelte";
-  import Category from "$lib/components/Table.svelte";
+  import ContentCard from "$lib/components/column.svelte";
+  import Category from "$lib/components/table.svelte";
 
 //  https://www.youtube.com/watch?v=DEGHlIRuIP8&t=423s
 //  https://github.com/sharu725/supabase-todo
