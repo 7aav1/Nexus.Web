@@ -30,8 +30,8 @@
       border: none;
       background: var(--color_01);
       border: 2px solid transparent;
-      font-size: 14px;
-      padding: 5px;
+      font-size: 15px;
+      padding: 3px;
     &:hover {background:var(--color_01); border: 2px solid var(--color_03);}
     &.active {background: #000}
 } }
@@ -39,35 +39,9 @@
 
 
 body {
-  background: linear-gradient(90deg, #f90, #ff0);
-
-
 > div {
-  grid: "head head" min-content "side main" 1fr "foot foot" min-content / min-content 1fr;
+  grid: "up up right" min-content "left main right" 1fr "bottom bottom right" min-content / min-content 1fr min-content;
   height: calc(100vh - 16px);
-
-  header {
-    grid-area: head;
-    border-bottom: 2px solid;}
-  > aside { // NEED IMP
-    grid-area: side;
-    width: max-content;
-    gap: 5px;
-    flex-direction: column;
-    padding: 5px;}
-  > main {
-    grid-area: main;
-    overflow: hidden overlay;
-    flex-direction: column;
-
-    &:hover::-webkit-scrollbar-thumb {
-      border: 3px solid transparent;
-      background-clip: padding-box !important;
-      background: #fff}
-    &::-webkit-scrollbar{ width: 10px;}}
-  footer {
-    grid-area: foot;
-    border-top: 2px solid;}
 } }
 
 
@@ -75,7 +49,7 @@ body {
   grid, body > div {
     display: grid;}
 
-  flex, header, aside, main, section :has(img), nav, summary {
+  flex, header, aside, main, nav, summary {
     display: flex;}
 
 
@@ -83,29 +57,17 @@ body {
     header, summary{
       justify-content: space-between;
     }
-    nav{
-      justify-content: end;
-      gap: 5px;
-      float: right;
-      width: 100%;}
 
 
 // BACKGROUND
-  header, footer {
-    background: #111 url(/noise.png);
-  }
-
-  main, aside, ol {
-    background: var(--color_02) }
-
-  section, ul {
-    background: var(--color_01);
-  }
+  header, footer {backdrop-filter: blur(3px) contrast(0.9);&:has(*){padding: 5px;}}
+  body {background: #111 url(/noise.png)}
+  main, ol {background: var(--color_02)}
+  section, ul {background: var(--color_01)}
 
 
 // PADDING
-  header, li {
-    padding: var(--padding,5px 10px) }
+  li {padding: 5px 10px;}
 
   section {
     &:not(:has(> header)){padding: 1em 1rem;}
@@ -131,16 +93,10 @@ body {
 ul, ol{
   padding-inline-start: 0px;
   margin-block: 5px;
-  &:has(button){
-    display: flex;
-    flex-direction: column;}
+  &:has(button){width: min-content;}
 
   li {
     color: var(--color_03);
     list-style-position: inside;
-    &:hover {
-      background: linear-gradient(90deg,var(--color_01), transparent);
-      list-style-type: "➜ ";
-    &::after {content: ""; background: local;}}
   }
 }

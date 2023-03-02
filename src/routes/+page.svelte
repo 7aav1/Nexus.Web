@@ -1,13 +1,19 @@
 <script lang="ts">
   import { supabase } from "$lib/supabase";
+  import Main from "$lib/main.svelte";
 
-  let agree:any;
+  let agree:any, logged: any;
 
 // DISCORD
   /* sign_in */ async function signIn() {
     const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'discord', }); }
+
+
+
 </script>
 
+
+  
 
 <section>
   <h1>About Us</h1>
@@ -42,3 +48,4 @@
     <h3>Hidden until you agree...</h3>
   {/if}
 </section>
+

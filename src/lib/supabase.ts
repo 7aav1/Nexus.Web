@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { writable, derived } from "svelte/store"
 
 // SUPABASE CLIENT
   export const supabase = createClient(
@@ -38,3 +39,13 @@ import { createClient } from '@supabase/supabase-js'
 
     if (data){ return data } else if (error){ alert(error) }
 }
+
+
+
+// SVELTE STORE - https://svelte.dev/repl/1a86d6f3df7b41f69f0fc93ba1ad0fd3?version=3.31.2
+  export const term = writable('');
+  export const items = writable(['dog', 'cat', 'fish', 'iguana']);
+  export const filtered = derived(
+  	[term, items], 
+  	([$term, $items]) => $items.filter(x => x.includes($term))
+  );
