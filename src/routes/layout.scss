@@ -42,6 +42,9 @@ body {
 > div {
   grid: "left up" min-content "left main" 1fr "left bottom" min-content / min-content 1fr min-content;
   height: calc(100vh - 16px);
+  @media only screen and (max-width: 800px)  {
+    > aside {display: none;}
+  }
 } }
 
 
@@ -73,7 +76,7 @@ body {
   section {
     &:not(:has(> header)){padding: 1em 1rem;}
     
-    &:last-child{height: 100%;}
+    &:last-child{height: -webkit-fill-available;}
     > :first-child{margin-top: 0;}
     > :last-child{margin-bottom: 0;}
   }

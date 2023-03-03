@@ -16,11 +16,8 @@
   
 
 <section>
-  <h1>About Us</h1>
-  <p>The small introduction of the server: Place where you can develop your social skills and find new friends or like-mindedIndividuals in   the process with whom you can have a great time.</p>
-</section> <section>
 
-  <h3>RULES</h3>
+  <h2>Rules</h2>
   <p>All you have to do is follow the <a href="https://discord.com/guidelines">Discord community guidelines</a>, that's it. Individuals who intentionally cause problems on the server will be removed from the server.</p>
   <ol>
     <li>DISRESPECT - Our community is a safe and respectable server and we ask everyone to respect each other. You should not be rude to any member or staff. Always speak politely and never bring anyone down.</li>
