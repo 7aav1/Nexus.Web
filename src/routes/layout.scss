@@ -40,11 +40,8 @@
 
 body {
 > div {
-  grid: "left up" min-content "left main" 1fr "left bottom" min-content / min-content 1fr min-content;
+  grid: "up" min-content "main" 1fr "bottom" min-content / 1fr;
   height: calc(100vh - 16px);
-  @media only screen and (max-width: 800px)  {
-    > aside {display: none;}
-  }
 } }
 
 
@@ -52,14 +49,8 @@ body {
   grid, body > div {
     display: grid;}
 
-  flex, header, aside, main, nav, summary {
+  flex, header, aside, main, nav {
     display: flex;}
-
-
-// ALIGN
-    header, summary{
-      justify-content: space-between;
-    }
 
 
 // BACKGROUND
@@ -67,10 +58,11 @@ body {
   header,footer {background: #000;}
   main, ol {background: var(--color_02)}
   section, ul {background: var(--color_01)}
+  hr {border-color: var(--color_02)}
 
 
 // PADDING
-  header, aside {&:has(*){padding: 5px }}
+  header, grid {&:has(*){padding: 5px }}
   li {padding: 5px 10px;}
 
   section {
@@ -89,7 +81,7 @@ body {
     + * {margin-top: 0 !important;}
   }
 
-  section + section{
+  section + section, summary + *{
     margin-top: 5px;}
 
 

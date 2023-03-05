@@ -18,7 +18,6 @@
     async function linked(){
       const { data } = await supabase.from('ulesanded').select().filter('kategooria', 'in', `(${id})`); column = data;
     }
-    console.log(linked())
   </script>
 
 

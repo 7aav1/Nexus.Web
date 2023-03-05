@@ -1,19 +1,12 @@
 <script lang="ts">
-  import { supabase } from "$lib/supabase";
+  import { ac } from "$lib/supabase";
   import Main from "$lib/main.svelte";
 
   let agree:any, logged: any;
 
-// DISCORD
-  /* sign_in */ async function signIn() {
-    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'discord', }); }
-
-
 
 </script>
 
-
-  
 
 <section>
 
@@ -40,7 +33,7 @@
   {#if agree}
     <h3>THING TO DO</h3>
     <p>All you have to do is follow the <a href="https://discord.com/ guidelines">Discord community guidelines</a>, that's it. Individuals who   intentionally cause problems  on the server will be removed from the  server.</p>
-    <button on:click={signIn}>SIGN IN</button>
+    <button on:click={ac.sign_in}>SIGN IN</button>
   {:else}
     <h3>Hidden until you agree...</h3>
   {/if}

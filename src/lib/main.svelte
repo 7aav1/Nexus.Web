@@ -1,7 +1,7 @@
 <!-- SCRIPTS ### -->
 <script>
   import { page } from '$app/stores';
-  import { supabase } from "$lib/supabase";
+  import { supabase, db } from "$lib/supabase";
 
   import ContentCard from "$lib/components/column.svelte";
   import Category from "$lib/components/table.svelte";
@@ -55,7 +55,7 @@
         </grid>
       </form>
     {:else}
-      <form on:submit={() => {exercise("create",null,null,null)}}>
+      <form on:submit={() => {db.create("ulesanded","nimi",pealkiri)}}>
         <h3>Exercise</h3>
         <grid style="gap: 5px;">
           <input type="text" bind:value={pealkiri} required placeholder="Title"/>

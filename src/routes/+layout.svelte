@@ -1,24 +1,26 @@
 <!-- HEAD ### -->
   <svelte:head>
-    <title>{name}</title>
+    <title>{import.meta.env.VITE_TITLE}</title>
     <meta name="description" content="SOON">
   </svelte:head>
 
 
 <!-- SCRIPT ### -->
-  <script lang="ts">
-    let name = import.meta.env.VITE_TITLE || "TITLE";
-
+  <script>
     import "./layout.scss";
-    import { supabase } from "$lib/supabase";
+    import { items, session, ac } from "$lib/supabase"; ac.sesson();
+    if ($session.user){ $items = [...$items, "account"] }
+
     import { onMount } from 'svelte';
     import { konami } from '$lib/function/konami.js'
 
+    import Header from "$lib/layout/header.svelte";
     import Sidebar from "$lib/layout/sidebar.svelte";
 
-    let load: boolean, user:any;
-    let bottom:boolean=true, up:boolean=true, left:boolean=true, right:boolean=true;
+    
+    let bottom=true, up=true, left=false, right=true;
 
+    
     function onKeyDown(e) {
       switch(e.keyCode) {
 			  case 38: up = !up; break;
@@ -28,37 +30,9 @@
 		  }
     }
 
-    onMount(() => {
+    let load; onMount(() => {
       setTimeout(() => { load = true },500)
   	});
-
-  // DISCORD
-    /* sign_out */ async function signOut() {
-      const { error } = await supabase.auth.signOut() }
-      // <button on:click={signOut}>sign Out</button>
-
-    onMount(() => {
-      supabase.auth.refreshSession()
-  		supabase.auth.onAuthStateChange((event, session) => {
-  			user = session?.user;
-  		})
-  	});
-
-
-    let hovering = false;
-    let enter = () => (hovering = true)
-    let leave = () => (hovering = false)
-
-
-
-    // CONSOLE
-    import { page } from '$app/stores';
-    import { afterUpdate } from 'svelte';
-    let paths:any;
-    afterUpdate(() => {
-      paths = $page.url.pathname;
-    });
-
   </script>
 
 
@@ -66,38 +40,13 @@
   {#if !load}
     <title style="display: block;">loading...</title>
   {:else} 
-    <header on:mouseleave={leave}>
-      {#if up}
-        <nav style="gap: 10px;">
-          {#each paths.split("/") as path, i}
-            {#if i == 0}
-              <a href="/">{name}</a>
-            {:else}
-              <span style="user-select: none">{path == "" ? "" : "/"}</span>
-              <a href="{paths.split(path)[0]}{path}">{path}</a>
-            {/if}
-          {/each}
-        </nav>
-        {#if user}
-    	      <!-- svelte-ignore a11y-click-events-have-key-events -->
-    	      <span on:mouseenter={enter} on:click={signOut}>
-    	        {#if !hovering}
-                Signed in as <q>{user.user_metadata.full_name}</q>
-              {:else}
-                <a href="/">Sign Out</a>
-              {/if}
-    	      </span>
-    	    {/if}
-        {/if}
+    <header>
+      {#if up} <Header /> {/if}
     </header>
 
-    {#if user}
-      <aside>
-        {#if left}
-          <Sidebar />
-        {/if}
-      </aside>
-    {/if}
+    <aside>
+      {#if left} <Sidebar /> {/if}
+    </aside>
 
     <main>
       {#if right}
@@ -145,21 +94,18 @@
   <style global lang="scss">
     header {
     grid-area: up;
-    border-bottom: 2px solid;}
+    border-bottom: 2px solid;
+    justify-content: space-between;}
     aside {
-    gap: 5px;
     flex-direction: column;
-
-    &:nth-of-type(1){grid-area: left;
+    grid-area: left;
+    position: fixed;
+    left: 0; top: 0;
+    height: 100%;
       &:has(*){
-        overflow: auto;
-        resize: horizontal;
-        padding: 5px;
-        width: 15rem;
-        backdrop-filter: blur(3px) contrast(0.9);
-        margin-right: 8px;}
-    
-    } }
+        width:15rem;
+        backdrop-filter: brightness(.5) blur(1rem);
+        border-right: 1px solid #555;} } 
     main {
     grid-area: main;
     overflow: hidden overlay;
