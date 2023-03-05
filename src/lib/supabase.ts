@@ -14,7 +14,7 @@ import { writable, derived } from "svelte/store"
   https://svelte.dev/tutorial/custom-stores
   https://svelte.dev/repl/b3db1726c02e494986ac266f09b35240?version=3.49.0
 */
-
+  
   function database(){
     const _data = writable([])
     
