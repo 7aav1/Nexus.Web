@@ -1,10 +1,9 @@
 <script>
   import { items, db, database } from "$lib/supabase";
 	$items = [...$items, "test"];
-  import Main from "$lib/main.svelte";
+
 </script>
 
-<Main></Main>
 <section>
 {#await db.read("ulesanded")}
   loading
