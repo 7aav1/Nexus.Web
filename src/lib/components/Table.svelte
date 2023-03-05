@@ -1,7 +1,7 @@
 <!-- SCRIPTS ### -->
   <script lang="ts">
     import { page } from '$app/stores';
-    import { supabase } from "$lib/supabase";
+    import { supabase } from "$lib/db/supabase";
     export let table:any = [];
 
     let id = table.id || $page.url.pathname.substring(1);

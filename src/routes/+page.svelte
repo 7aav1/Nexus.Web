@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ac } from "$lib/supabase";
+  import { ac } from "$lib/db/supabase";
   let agree:any, logged: any;
 
 

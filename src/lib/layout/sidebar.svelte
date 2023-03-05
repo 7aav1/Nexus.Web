@@ -1,5 +1,8 @@
 <script>
-	import { filtered, term, items, session } from "$lib/supabase";	
+	import { session } from "$lib/db/supabase";
+	import { filtered, term, items } from "$lib/db/svelte_store";
+	
+	if ($session != null && !$items.includes("account")){ $items = [...$items, "account"] };
   let val = '';
 </script>
 
@@ -17,9 +20,9 @@
 							<section>Works</section>
 						{:else if item == "account"}
 							<grid style="grid: 'pfp auto' 14px 'pfp auto' 10px / 32px 1fr;">
-								<img style="grid-area:pfp;height:26px;outline: 1px solid;" src={$session.user.user_metadata.avatar_url} alt="pfp">
-								<a style="line-height: 14px;" href="https://discord.com/users/{$session.user.user_metadata.provider_id}">{$session.user.user_metadata.full_name}	</a>
-								<small style="line-height: 10px;">{$session.user.user_metadata.email}</small>
+								<img style="grid-area:pfp;height:26px;outline: 1px solid;" src={$session.user_metadata.avatar_url} alt="pfp">
+								<a style="line-height: 14px;" href="https://discord.com/users/{$session.user_metadata.provider_id}">{$session.user_metadata.full_name}	</a>
+								<small style="line-height: 10px;">{$session.user_metadata.email}</small>
 							</grid>
 							<hr> 
 						{/if}

@@ -1,15 +1,9 @@
 <script>
-	import { ac, session } from "$lib/supabase";
+	import { ac, session } from "$lib/db/supabase";
 
 // BREADCRUMBS
   import { page } from '$app/stores';
-
-
   let paths = $page.url.pathname;
-  let hovering = false;
-
-  // DISCORD
-
 </script>
 
 <nav style="gap: 10px;">
@@ -22,8 +16,8 @@
     {/if}
   {/each}
 </nav>
-{#if $session.user}
-  <button on:click={ac.sign_out}> Sign Out</button>
+{#if $session != null}
+  <button on:click={()=>{ac.sign_out()}}> Sign Out</button>
 {:else}
-  <button on:click={ac.sign_in}> Sign In</button>
+  <button on:click={()=>{ac.sign_in()}}> Sign In</button>
 {/if}

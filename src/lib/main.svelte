@@ -1,7 +1,7 @@
 <!-- SCRIPTS ### -->
 <script>
   import { page } from '$app/stores';
-  import { supabase, db } from "$lib/supabase";
+  import { supabase, db } from "$lib/db/supabase";
 
   import ContentCard from "$lib/components/column.svelte";
   import Category from "$lib/components/table.svelte";

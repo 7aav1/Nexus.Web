@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { db } from "$lib/supabase";
+  import { db } from "$lib/db/supabase";
   export let column:any = [];
 
   let edit:boolean, title:Text;

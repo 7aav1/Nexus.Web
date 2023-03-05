@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
-import { writable, derived } from "svelte/store"
+import { items } from "$lib/db/svelte_store";
+import { writable } from "svelte/store"
+
 
 // SUPABASE CLIENT
   export const supabase = createClient(
@@ -32,25 +34,18 @@ import { writable, derived } from "svelte/store"
 
 
 // USER ACTIONS
+
   export let session = writable({}); function _session(){
     return {
-      sign_in: async function(){ await supabase.auth.signInWithOAuth({ provider: 'discord', }); ac.sesson },
+      sign_in: async function(){ await supabase.auth.signInWithOAuth({ provider: 'discord', }); ac.sesson},
 
-      sesson: async function(){ const { data, error } = await supabase.auth.refreshSession(); session.set(data); let _data = data;
+      sesson: async function(){ const { data, error } = await supabase.auth.refreshSession(); session.set(data.user); let _data = data;
       /* check if used id exist */
       if (!error){ const { data } = await supabase.from('account').select().eq('user_id', _data.user.user_metadata.provider_id)
         /* add user id to database table */
         if (!data[0].user_id){ await supabase.from('account').insert([{ user_id: _data.user.user_metadata.provider_id }]) } } },
 
-      sign_out: async function(){ await supabase.auth.signOut(); ac.sesson }
+      sign_out: async function(){ await supabase.auth.signOut(); location.reload()}
 
   } } export let ac = _session();
 
-
-
-// SVELTE STORE - https://svelte.dev/repl/1a86d6f3df7b41f69f0fc93ba1ad0fd3?version=3.31.2
-  export const term = writable('');
-  export const items = writable([]);
-  export const filtered = derived(
-  	[term, items], ([$term, $items]) => $items.filter(x => x.includes($term))
-  );

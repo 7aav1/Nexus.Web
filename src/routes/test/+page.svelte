@@ -1,7 +1,7 @@
 <script>
-  import { items, db, database } from "$lib/supabase";
+  import { db, database } from "$lib/db/supabase";
+  import { items } from "$lib/db/svelte_store";
 	$items = [...$items, "test"];
-
 </script>
 
 <section>
