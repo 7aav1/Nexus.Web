@@ -1,7 +1,5 @@
 <script lang="ts">
   import { ac } from "$lib/supabase";
-  import Main from "$lib/main.svelte";
-
   let agree:any, logged: any;
 
 
