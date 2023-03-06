@@ -3,9 +3,10 @@
   input {font-family: monospace;}
 
   --color_00: #f90;
-  --color_01: #333;
-  --color_02: #555;
-  --color_03: #ccc;
+  --color_01: #000;
+  --color_02: #333;
+  --color_03: #555;
+  --color_04: #ccc;
 
   color: #aaa
 }
@@ -28,11 +29,11 @@
     cursor: pointer;
     &[class*="ri-"] {
       border: none;
-      background: var(--color_01);
+      background: var(--color_02);
       border: 2px solid transparent;
       font-size: 15px;
       padding: 3px;
-    &:hover {background:var(--color_01); border: 2px solid var(--color_03);}
+    &:hover {background:var(--color_02); border: 2px solid var(--color_04);}
     &.active {background: #000}
 } }
 
@@ -55,11 +56,16 @@ body {
 
 // BACKGROUND
   body {background: #111 url(/noise.png)}
-  header,footer {background: #000;}
-  main, ol {background: var(--color_02)}
-  section, ul {background: var(--color_01)}
-  hr {border-color: var(--color_02)}
+  header,footer {background: var(--color_01);}
+  section, ul {background: var(--color_02)}
+  main, ol {background: var(--color_03)}
+  
+  hr {border-color: var(--color_03)}
 
+
+// TRANSITION
+  :has(--theme){ header, footer, main, section, hr {
+    transition: 1s;} }
 
 // PADDING
   header, grid {&:has(*){padding: 5px }}
@@ -92,7 +98,7 @@ ul, ol{
   &:has(button){width: min-content;}
 
   li {
-    color: var(--color_03);
+    color: var(--color_04);
     list-style-position: inside;
   }
 }

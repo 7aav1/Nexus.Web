@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js'
-import { items } from "$lib/db/svelte_store";
 import { writable } from "svelte/store"
 
 
@@ -11,10 +10,7 @@ import { writable } from "svelte/store"
 
 
 /* DATABASE CRUD
-  https://www.youtube.com/watch?v=ROvh1l7X23M
-  https://svelte.dev/repl/2254c3b9b9ba4eeda05d81d2816f6276?version=3.32.2
-  https://svelte.dev/tutorial/custom-stores
-  https://svelte.dev/repl/b3db1726c02e494986ac266f09b35240?version=3.49.0
+  
 */ export let database = writable([]); function _database(){
     return {
       create: async function(table: any, column: any, value: any){ 
@@ -34,7 +30,6 @@ import { writable } from "svelte/store"
 
 
 // USER ACTIONS
-
   export let session = writable({}); function _session(){
     return {
       sign_in: async function(){ await supabase.auth.signInWithOAuth({ provider: 'discord', }); ac.sesson},

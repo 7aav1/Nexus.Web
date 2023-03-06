@@ -6,3 +6,6 @@ import { writable, derived } from "svelte/store"
   export const filtered = derived(
     [term, items], ([$term, $items]) => $items.filter(x => x.includes($term))
   );
+
+// THEME
+  export const theme = writable(0);
