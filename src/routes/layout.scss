@@ -5,18 +5,16 @@
   body {
     --theme_00: hsl(var(--theme) 100% 75%);
     --theme_01: hsl(var(--theme) 100% 5%);
-    --theme_02: hsl(var(--theme) 50% 20%);
-    --theme_03: hsl(var(--theme) 50% 33%);
+    --theme_02: hsl(var(--theme) 100% 15% / .7);
+    --theme_03: hsl(var(--theme) 100% 33%);
+    --color: hsl(var(--theme) 0% 80%);
 
     --color_00: var(--theme_00, #f90);
     --color_01: var(--theme_01, #000);
-    --color_02: var(--theme_02, #333);
+    --color_02: var(--theme_02, #333333b3);
     --color_03: var(--theme_03, #555);
-    --color_04: #ccc;
+    color: var(--color, #aaa);
   }
-  
-
-  color: #aaa
 }
 
 
@@ -61,6 +59,15 @@ body {
   flex, header, aside, main, nav {
     display: flex;}
 
+// FILTER
+  section {
+    backdrop-filter: blur(2px);}
+
+
+// Z-INDEX
+  aside {
+    z-index: 1 }
+
 
 // BACKGROUND
   body {background: #111 url(/noise.png)}
@@ -85,7 +92,6 @@ body {
     > :first-child{margin-top: 0;}
     > :last-child{margin-bottom: 0;}
   }
-
 
 
 // MARGIN

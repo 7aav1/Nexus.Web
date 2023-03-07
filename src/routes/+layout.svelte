@@ -115,6 +115,7 @@
     grid-area: main;
     overflow: hidden overlay;
     flex-direction: column;
+    background-image: url("/canyon.png");
     &:hover::-webkit-scrollbar-thumb {
       border: 3px solid transparent;
       background-clip: padding-box !important;
