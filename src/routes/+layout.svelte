@@ -9,8 +9,8 @@
   <script>
     import "./layout.scss";
     
+    import { browser } from '$app/environment';
     import { ac } from "$lib/db/supabase";
-    import { theme } from "$lib/db/svelte_store";
     import { konami } from '$lib/function/konami.js'
 
     import Header from "$lib/layout/header.svelte";
@@ -26,18 +26,22 @@
         case 37: left = !left; break;
 			  case 39: right = !right; break;
 		  }
+    };
+
+  // THEME LOAD
+    if(browser){
+      document.body.style.setProperty('--theme',window.localStorage.getItem('theme'));
     }
-
-
   </script>
 
-
+  
 <!-- CONTENT ### -->
+  <svelte:body class:theme={bottom} />
   {#await ac.sesson()}
     <img src="/loading.gif" alt="Loading..." style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
   {:then} 
   
-      <header style="--theme:{$theme}">
+      <header>
         {#if up} <Header /> {/if}
       </header>
 

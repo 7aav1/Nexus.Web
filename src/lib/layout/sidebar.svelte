@@ -1,14 +1,18 @@
 <script>
 	import { session } from "$lib/db/supabase";
-	import { theme, filtered, term, items } from "$lib/db/svelte_store";
+	import { filtered, term, items } from "$lib/db/svelte_store";
+	import { browser } from '$app/environment';
 
-	if ($session != null && !$items.includes("account")){ $items = [...$items, "account"] };
+	if ($session != null && !$items.includes("account")){ $items = [...$items, "account", "theme"] };
   let val = '';
 
-	let deg; import { onMount } from "svelte"; onMount(() => {
-		deg = window.localStorage.getItem('theme') || 0;
-		theme.set(deg);
-	})
+	let deg;
+
+	if(browser){ deg = localStorage.getItem('theme'); document.body.style.setProperty('--theme',deg); }
+
+	function theme(hsla){
+		if(hsla == null){ localStorage.removeItem('theme'); document.body.style.setProperty('--theme',null) }
+		else {localStorage.setItem('theme',hsla); document.body.style.setProperty('--theme',hsla)} }
 </script>
 
 
@@ -29,8 +33,9 @@
 								<a style="line-height: 14px;" href="https://discord.com/users/{$session.user_metadata.provider_id}">{$session.user_metadata.full_name}	</a>
 								<small style="line-height: 10px;">{$session.user_metadata.email}</small>
 							</grid>
-							<hr>
-							<input title='{deg}deg' on:click={() => {localStorage.setItem('theme',	deg); theme.set(deg)}} class="color-range" type="range" min="0" 	max="360" bind:value={deg}>
+						{:else if item == "theme"}
+							<input title='{deg}deg' on:click={() => {theme(deg)}} type="range" min="0" max="360" bind:value={deg}>
+							<button on:click={()=>{theme(null)}}>deafult</button>
 						{/if}
 
 					<hr> </details>
