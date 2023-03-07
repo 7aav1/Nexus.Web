@@ -36,9 +36,10 @@ import { writable } from "svelte/store"
 
       sesson: async function(){ const { data, error } = await supabase.auth.refreshSession(); session.set(data.user); let _data = data;
       /* check if used id exist */
-      if (!error){ const { data } = await supabase.from('account').select().eq('user_id', _data.user.user_metadata.provider_id)
+      if (!error){ const { data } = await supabase.from('account').select().eq('user_id', _data.user.user_metadata.provider_id); let _id:any = data;
         /* add user id to database table */
-        if (!data[0].user_id){ await supabase.from('account').insert([{ user_id: _data.user.user_metadata.provider_id }]) } } },
+        if (_id == ""){ await supabase.from('account').insert([{ user_id: _data.user.user_metadata.provider_id }]) }
+      } },
 
       sign_out: async function(){ await supabase.auth.signOut(); location.reload()}
 
