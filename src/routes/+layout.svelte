@@ -21,6 +21,7 @@
     let bottom=true, up=true, left=false, right=true;
     function onKeyDown(e) {
       switch(e.keyCode) {
+        case 27: left = !left; break; // Escape
 			  case 38: up = !up; break;
 			  case 40: bottom = !bottom; break;
         case 37: left = !left; break;
