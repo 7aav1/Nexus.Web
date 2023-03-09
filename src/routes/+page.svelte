@@ -1,8 +1,8 @@
 <script lang="ts"></script>
 
-
 <section>
-
+  .
+</section> <section>
   <h2>Development</h2>
   <grid>
     <label><input type="checkbox" checked={true}> HTML Layout</label>
@@ -15,13 +15,6 @@
     <label><input type="checkbox" checked={false}> Theme HSLA'S</label>
     <label><input type="checkbox" checked={true}> Minimalistic Layout SCSS</label>
     <label><input type="checkbox" checked={true}> Sidebar Search</label>
-    <label><input type="checkbox" checked={true}> Discord User_ID</label>
     <label><input type="checkbox" checked={false}> Discord Bot</label>
   </grid>
-  
-
-</section>
-
-<section>
-  .
 </section>

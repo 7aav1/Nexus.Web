@@ -4,7 +4,7 @@
 
   body {
     --theme_00: hsl(var(--theme) 100% 75%);
-    --theme_01: hsl(var(--theme) 100% 5%);
+    --theme_01: hsl(var(--theme) 100% 3%);
     --theme_02: hsl(var(--theme) 100% 15% / .7);
     --theme_03: hsl(var(--theme) 100% 33%);
     --color: hsl(var(--theme) 0% 80%);
@@ -21,7 +21,7 @@
 // SELECT
   ::selection {background:#ffffff80;color:#000;border-radius: 5px;}
   [title] {cursor: help}
-  :any-link{text-decoration: none;cursor: pointer;
+  :any-link, code{text-decoration: none;cursor: pointer;
     &::selection{background: var(--color_00);}}
 
 
@@ -72,18 +72,19 @@ body {
 // BACKGROUND
   body {background: #111 url(/noise.png)}
   header,footer {background: var(--color_01);}
-  section, ul {background: var(--color_02)}
-  main, ol {background: var(--color_03)}
+  section {background: var(--color_02)}
+  main {background: var(--color_03)}
   hr {border-color: #555}
 
 
 // TRANSITION
-  header, footer, main, section, hr, ol, ul {
+  main, section, hr, ol, ul {
     transition: 1s; }
+
 
 // PADDING
   header, grid {&:has(*){padding: 5px }}
-  li {padding: 5px 10px;}
+  li {padding: 5px 0;}
 
   section {
     &:not(:has(> header)){padding: 1em 1rem;}
