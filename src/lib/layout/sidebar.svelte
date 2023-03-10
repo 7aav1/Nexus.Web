@@ -15,36 +15,38 @@
 
 
 	<grid style="gap: 5px;">
-		<input placeholder="Search" bind:value={val} type="text" on:input={term.set(val)}>
+		<input style="margin: 0 0 5px;" placeholder="Search" bind:value={val} type="text" on:input={term.set(val)}>
 
 				{#each [...new Set($filtered)] as item}
 					<details open={!val}>
 						<summary style="font-family: monospace;">{item}</summary>
-
-						{#if item == "test"}
-							<section>Works</section>
-						{:else if item == "account"}
-							<grid style="grid: 'pfp auto' 14px 'pfp auto' 10px / 32px 1fr;">
-								<img style="grid-area:pfp;height:26px;outline: 1px solid;" src={$session.user_metadata.avatar_url} alt="pfp">
-								<a style="line-height: 14px;" href="https://discord.com/users/{$session.user_metadata.provider_id}">{$session.user_metadata.full_name}	</a>
-								<small style="line-height: 10px;">{$session.user_metadata.email}</small>
-							</grid>
-						{:else if item == "theme"}
-							<input title='{deg}deg' on:click={() => {theme(deg)}} type="range" min="0" max="360" bind:value={deg}>
-							{#if deg != null} <button on:click={()=>{theme(null);}}>deafult</button> {/if}
-						{:else if item == "discord"}
-							<section>
-								Server: <a title="Join" href={$discord.instant_invite}>{$discord.name}</a> / Online: 
-								<label>{$discord.presence_count} <input type="color"value="#66ff00" disabled></label>
-							</section> <section>
-								{#if !$profile.discord}
-									Thanks for joining the {$discord.name} community! 
-								{:else}
-									use <code>/login</code> slash command in <q>{$discord.name}</q> or wait 7 days...
-								{/if}
-							</section>
-						{/if}
-
+						<section>
+							{#if item == "account"}
+									<grid style="grid: 'pfp auto' 14px 'pfp auto' 10px / 32px 1fr;">
+										<img style="grid-area:pfp;height:26px;outline: 1px solid;" src={$session.user_metadata.avatar_url} alt="pfp">
+										<a style="line-height: 14px;" href="https://discord.com/users/{$session.user_metadata.provider_id}">{$session.user_metadata.full_name}	</a>
+										<small style="line-height: 10px;">{$session.user_metadata.email}</small>
+									</grid>
+							{:else if item == "theme"}
+									<flex>
+										<input title='{deg}deg' on:click={() => {theme(deg)}} type="range" min="0" max="360" bind:value={deg}>
+										{#if deg != null} <button on:click={()=>{theme(null);}}>deafult</button> {/if}
+									</flex>
+							{:else if item == "discord"}
+								<div>
+									Server: <a title="Join" href={$discord.instant_invite}>{$discord.name}</a> / 
+									<label title="Online">{$discord.presence_count} <input type="color"value="#66ff00" disabled></label>
+								</div>
+								<hr>
+								<div>
+									{#if !$profile.discord}
+										Thanks for joining the {$discord.name} community! 
+									{:else}
+										use <code>/login</code> slash command in <q>{$discord.name}</q> or wait 7 days...
+									{/if}
+								</div>
+							{/if}
+						</section>
 					</details>
 				{/each}
 
@@ -56,18 +58,22 @@
 	<style lang="scss">
 		details {
 			user-select: none;
+			outline: 1px solid #444;
 			&[open]summary { list-style-type: '+ '; }
 			summary {
 				list-style-type: '- ';
 			  background: #000;
 			  color: #FFF;
-			  padding: 2px 10px 4px;
+			  padding: 2px 10px 4px; }
+			hr { margin-block: 4px; }
+			> section {
+				box-shadow: inset 0 0 0 1px #000;
+				padding: 4px 5px;
+				background: var(--color_02) url(/pattern.png);
+				div { padding: 0 5px 2px; }
 			}
 		}
 
-		section {
-			box-shadow: inset 0 0 0px 1px #444;
-			padding: 2px 5px 4px;}
 		input[type="range"] {
       border-radius: 3px;
     	padding: 2px;

@@ -12,9 +12,10 @@
     <label><input type="checkbox" checked={true}> Database CRUD</label>
     <label><input type="checkbox" checked={true}> Site Loader</label>
     <label><input type="checkbox" checked={true}> Local Theme</label>
-    <label><input type="checkbox" checked={false}> Theme HSLA'S</label>
+    <label><input type="checkbox" checked={true}> Theme HSLA'S</label>
     <label><input type="checkbox" checked={true}> Minimalistic Layout SCSS</label>
     <label><input type="checkbox" checked={true}> Sidebar Search</label>
-    <label><input type="checkbox" checked={false}> Discord Bot</label>
+    <label><input type="checkbox" checked={true}> Discord Bot</label>
+    <label><input type="checkbox" checked={false}> Live Database</label>
   </grid>
 </section>
