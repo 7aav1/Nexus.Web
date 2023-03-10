@@ -18,7 +18,7 @@
 		<input style="margin: 0 0 5px;" placeholder="Search" bind:value={val} type="text" on:input={term.set(val)}>
 
 				{#each [...new Set($filtered)] as item}
-					<details open={!val}>
+					<details open={!val} style={item == "account" ? "grid-row: 2;" : ""}>
 						<summary style="font-family: monospace;">{item}</summary>
 						<section>
 							{#if item == "account"}
@@ -28,9 +28,9 @@
 										<small style="line-height: 10px;">{$session.user_metadata.email}</small>
 									</grid>
 							{:else if item == "theme"}
-									<flex>
-										<input title='{deg}deg' on:click={() => {theme(deg)}} type="range" min="0" max="360" bind:value={deg}>
-										{#if deg != null} <button on:click={()=>{theme(null);}}>deafult</button> {/if}
+									<flex style="gap: 3px;">
+										<input class="theme" on:click={() => {theme(deg)}} type="range" min="0" max="360" bind:value={deg}>
+										<button on:click={()=>{theme(null);}} disabled={deg == null}>deafult</button>
 									</flex>
 							{:else if item == "discord"}
 								<div>
@@ -58,7 +58,7 @@
 	<style lang="scss">
 		details {
 			user-select: none;
-			outline: 1px solid #444;
+			outline: 1px solid #333;
 			&[open]summary { list-style-type: '+ '; }
 			summary {
 				list-style-type: '- ';
@@ -71,11 +71,14 @@
 				padding: 4px 5px;
 				background: var(--color_02) url(/pattern.png);
 				div { padding: 0 5px 2px; }
+				&:has(.theme) {
+					padding: 3px;
+				button {border: #fff;}}
 			}
 		}
 
 		input[type="range"] {
-      border-radius: 3px;
+      margin: 0;
     	padding: 2px;
 			appearance: none;
 			width: -webkit-fill-available;
