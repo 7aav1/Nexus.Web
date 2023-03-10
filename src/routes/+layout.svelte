@@ -112,15 +112,16 @@
     border-bottom: 2px solid;
     justify-content: space-between;}
     aside {
-    flex-direction: column;
-    grid-area: left;
-    position: fixed;
-    left: 0; top: 0;
-    height: 100%;
-      &:has(*){
-        width:15rem;
-        backdrop-filter: brightness(.5) blur(1rem);
-        border-right: 1px solid #555;} } 
+      display: grid;
+      grid-template-rows: min-content 1fr   min-content;
+      align-items: start;
+      position: fixed;
+      left: 0; top: 0;
+      height: 100%;
+        &:has(*){
+          width:15rem;
+          background: #161616;
+          border-right: 1px solid #555;} } 
     main {
     grid-area: main;
     overflow: hidden overlay;

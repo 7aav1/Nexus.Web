@@ -6,3 +6,11 @@ code {
   outline: 1px solid;
   user-select: all;
 }
+[type="note"]{
+  user-select: none;
+  padding: 5px 7px 7px;
+  border-radius: 3px;
+  background: var(--color_02) url(/noise.png);
+  color: var(--color_00);
+  outline: 1px solid;
+}
