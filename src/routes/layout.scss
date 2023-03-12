@@ -26,8 +26,11 @@
 
 
 // FONT COLOR
-  title, h1, h2, h3, b, q, :any-link, button[class*="ri-"] {
+  title, h1, h2, h3, b, q, span, [class*="ri-"]::before {
     color: #fff }
+
+  :any-link {
+    color: var(--color_00);}
 
 
 // BUTTON

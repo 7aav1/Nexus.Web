@@ -1,12 +1,12 @@
 <script>
 	import { session, profile } from "$lib/db/supabase";
-	import { filtered, term, discord } from "$lib/db/svelte_store";
+	import { filtered, term, items, discord } from "$lib/db/svelte_store";
 	import { browser } from '$app/environment';
 
   let val = '', deg;
 
  // THEME HSLA
-	if(browser){ deg = localStorage.getItem('theme'); document.body.style.setProperty('--theme',deg); }
+	if(browser){ deg = localStorage.getItem('theme'); document.body.style.setProperty('--theme',deg); localStorage.konami ? $items = [...$items, "konami"] : ""}
 	function theme(hsla){
 		if(hsla == null){ localStorage.removeItem('theme'); document.body.style.setProperty('--theme',null); deg=null }
 		else {localStorage.setItem('theme',hsla); document.body.style.setProperty('--theme',hsla)} }
@@ -23,21 +23,31 @@
 		<input placeholder="Search" bind:value={val} type="text" on:input={term.set(val)}>
 		<hr>
 	
-</grid> <grid style="gap: 5px;padding: 0 5px;">
+</grid> <grid style="gap: 5px;padding: 0 5px;" class="items">
 	<!-- Body -->
 	{#if $filtered.includes("nexus_discord")}
-	<small>Discord</small>
+		<small>Discord</small>
 		<a class="ri-discord-fill" href={$discord.instant_invite}>{$discord.name}
 			<span><label title="Online">{$discord.presence_count} <input type="color"value="#66ff00" 	disabled></label></span>
 		</a>
     <div type="note">
-			{#if !$profile.discord}
+			{#if $profile.discord}
 				Thanks for joining the {$discord.name} community! 
 			{:else}
 				use <code>/login</code> slash command in <q>{$discord.name}</q> or wait 7 days...
 			{/if}
 		</div>
-	{/if}
+		{/if}
+		{#if $filtered.includes("konami")}
+			<small>Konami</small>
+			{#each JSON.parse(localStorage.konami) as item}
+				<a class="ri-settings-4-fill" href={null}>{item}
+					{#if item == "watch"}<span>SOON</span>{/if}
+				</a>
+			{/each}
+			 
+		{/if}
+		
 
 </grid> <flex style="gap: 3px;padding: 5px;">
 	<!-- Footer -->
@@ -47,6 +57,7 @@
 
 
 	<style lang="scss">
+		.items small:not(:first-child){margin-top: 1rem;}
 		a{
 			display: grid;
     	grid-template-columns: min-content 1fr max-content;
