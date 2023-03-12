@@ -1,3 +1,6 @@
-<script></script>
-<section>Hi</section>
+<script>
+  import Watch from "$lib/page/watch.svelte";
+</script>
 
+
+<Watch />

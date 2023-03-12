@@ -2,7 +2,6 @@
 	import { session, profile } from "$lib/db/supabase";
 	import { filtered, term, items, discord } from "$lib/db/svelte_store";
 	import { browser } from '$app/environment';
-
   let val = '', deg;
 
  // THEME HSLA
@@ -14,29 +13,31 @@
 
 <grid style="gap: 5px">
 	<!-- header -->
-		<grid style="grid: 'pfp auto' 14px 'pfp auto' 10px / 32px 1fr;">
-			<img style="grid-area:pfp;height:26px;outline: 1px solid;" src={$session.user_metadata.	avatar_url} alt="pfp">
-			<a style="line-height: 14px;" href="https://discord.com/users/{$session.user_metadata.	provider_id}">{$session.user_metadata.full_name}	</a>
-			<small style="line-height: 10px;">{$session.user_metadata.email}</small>
-		</grid>
-		<hr>
+		{#if $session != null}
+			<grid style="grid: 'pfp auto' 14px 'pfp auto' 10px / 32px 1fr;">
+				<img style="grid-area:pfp;height:26px;outline: 1px solid;" src={$session.user_metadata.avatar_url} alt="pfp">
+				<a style="line-height: 14px;" href="https://discord.com/users/{$session.user_metadata.provider_id}">{$session.user_metadata.full_name}	</a>
+				<small style="line-height: 10px;">{$session.user_metadata.email}</small>
+			</grid>
+			<hr>
+		{/if}
 		<input placeholder="Search" bind:value={val} type="text" on:input={term.set(val)}>
 		<hr>
 	
 </grid> <grid style="gap: 5px;padding: 0 5px;" class="items">
 	<!-- Body -->
-	{#if $filtered.includes("nexus_discord")}
-		<small>Discord</small>
-		<a class="ri-discord-fill" href={$discord.instant_invite}>{$discord.name}
-			<span><label title="Online">{$discord.presence_count} <input type="color"value="#66ff00" 	disabled></label></span>
-		</a>
-    <div type="note">
-			{#if $profile.discord}
-				Thanks for joining the {$discord.name} community! 
-			{:else}
-				use <code>/login</code> slash command in <q>{$discord.name}</q> or wait 7 days...
-			{/if}
-		</div>
+		{#if $filtered.includes("nexus_discord") && $discord != null}
+			<small>Discord</small>
+			<a class="ri-discord-fill" href={$discord.instant_invite}>{$discord.name}
+				<span><label title="Online">{$discord.presence_count} <input type="color"value="#66ff00" 	disabled></label></span>
+			</a>
+  	  <div type="note">
+				{#if $profile.discord}
+					Thanks for joining the {$discord.name} community! 
+				{:else}
+					use <code>/login</code> slash command in <q>{$discord.name}</q> or wait 7 days...
+				{/if}
+			</div>
 		{/if}
 		{#if $filtered.includes("konami")}
 			<small>Konami</small>

@@ -21,3 +21,9 @@
 {:else}
   <button on:click={()=>{ac.sign_in()}}> Sign In</button>
 {/if}
+
+<style lang="scss">
+  nav {
+    a:not(:first-child):first-letter {text-transform: uppercase}
+  }
+</style>

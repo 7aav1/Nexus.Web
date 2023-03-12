@@ -8,4 +8,4 @@ import { writable, derived } from "svelte/store"
   );
 
 // DISCORD
-  export const discord = writable('');
+  export const discord = writable(null);

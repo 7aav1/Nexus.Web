@@ -35,12 +35,14 @@ import { writable } from "svelte/store"
     return {
       sign_in: async function(){ await supabase.auth.signInWithOAuth({ provider: 'discord', }); ac.sesson},
 
-      sesson: async function(){ const { data, error } = await supabase.auth.refreshSession(); session.set(data.user); let _data = data;
-        /* check if used id exist */
-        if (!error){ const { data } = await supabase.from('account').select().eq('user_id', _data.user.user_metadata.provider_id); let _id = data;
+      sesson: async function(){ const { data, error } = await supabase.auth.refreshSession(); let _data;
+        if (!error){ session.set(data.user); _data = data.user.user_metadata }
+        if (!error){ ac.account(_data.provider_id);
+          /* check if used id exist */
+          const { data } = await supabase.from('account').select().eq('user_id', _data.provider_id); let _id = data;
           /* add user id to database table */
-          if (_id == ""){ await supabase.from('account').insert([{ user_id: _data.user.user_metadata.provider_id }]) } }
-          ac.account(data.user.user_metadata.provider_id); },
+          if (_id == ""){ await supabase.from('account').insert([{ user_id: _data.provider_id }]) } }
+        else { session.set(null); profile.set(null) } },
         
       account: async function(id){ const { data } = await supabase.from('account').select().eq('user_id', id); profile.set(data[0])},
 
