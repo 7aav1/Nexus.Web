@@ -32,12 +32,15 @@
 				<span><label title="Online">{$discord.presence_count} <input type="color"value="#66ff00" 	disabled></label></span>
 			</a>
   	  <div type="note">
-				{#if $profile.discord}
+				{#if $profile == null}
+					Join and you will be part of something big!
+				{:else if $profile.discord}
 					Thanks for joining the {$discord.name} community! 
 				{:else}
 					use <code>/login</code> slash command in <q>{$discord.name}</q> or wait 7 days...
 				{/if}
 			</div>
+			
 		{/if}
 		{#if $filtered.includes("konami")}
 			<small>Konami</small>

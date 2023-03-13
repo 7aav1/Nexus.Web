@@ -12,7 +12,7 @@
     
     import { browser } from '$app/environment';
     
-    import { ac, session } from "$lib/db/supabase";
+    import { ac } from "$lib/db/supabase";
     import { discord } from "$lib/db/svelte_store";
     import { konami } from '$lib/function/konami.js'
 
@@ -21,13 +21,12 @@
 
 
   // NEXT
-    if($session != null){
-      (async function next(){
-      // Discord Server JSON API
-        let res = await fetch(import.meta.env.VITE_DISCORD_SERVER_JSON); console.log(res)
-        if (res.ok) {discord.set(await res.json())}
-      })()
-    }
+    (async function next(){
+    // Discord Server JSON API
+      let res = await fetch(import.meta.env.VITE_DISCORD_SERVER_JSON);
+      if (res.ok) {discord.set(await res.json())}
+    })()
+    
 
   // PAGE CONTROLS
     let bottom=true, up=true, left=false, right=true;
