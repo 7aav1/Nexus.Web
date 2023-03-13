@@ -1,11 +1,11 @@
 // Supabase Database
 import { supabase } from "$lib/db/supabase";
-const { data } = await supabase.from('system').select().eq('name', "konami");
 
 // Konami Code
 let combo = [],time = Date.now();
 
-export function konami({ keyCode }) {
+export async function konami({ keyCode }) {
+  const { data } = await supabase.from('system').select().eq('name', "konami");
   let local = localStorage.konami ? JSON.parse(localStorage.konami) : []
   const list = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13]
   const now = Date.now()

@@ -12,8 +12,8 @@
     
     import { browser } from '$app/environment';
     
-    import { ac, session } from "$lib/db/supabase";
-    import { discord } from "$lib/db/svelte_store";
+    import { ac } from "$lib/db/supabase";
+    // import { discord } from "$lib/db/svelte_store";
     import { konami } from '$lib/function/konami.js'
 
     import Header from "$lib/layout/header.svelte";
