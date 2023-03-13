@@ -21,11 +21,12 @@
 
 
   // NEXT
-    (async function next(){
+  import { onMount } from 'svelte';
+  onMount(async () => {
     // Discord Server JSON API
       let res = await fetch(import.meta.env.VITE_DISCORD_SERVER_JSON);
       if (res.ok) {discord.set(await res.json())}
-    })()
+  });
     
 
   // PAGE CONTROLS
@@ -115,13 +116,19 @@
       display: grid;
       grid-template-rows: min-content 1fr   min-content;
       align-items: start;
-      position: fixed;
-      left: 0; top: 0;
-      height: 100%;
-        &:has(*){
-          width:15rem;
-          background: #161616;
-          border-right: 1px solid #555;} } 
+      grid-area: left;
+
+      @media only screen and (max-width: 800px) {
+        position: fixed;
+        left: 0; top: 0;
+        height: 100%;
+      }
+      
+      &:has(*){
+        width:15rem;
+        background: #22222299;
+        border-right: 1px solid;}
+    } 
     main {
     grid-area: main;
     overflow: hidden overlay;
